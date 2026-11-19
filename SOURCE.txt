@@ -1,0 +1,38 @@
+TruckPlay 2.0 (Easy launcher)
+=============================
+
+TruckPlay is free software under the GNU General Public License,
+version 3 or later (GPL-3.0-or-later), because it is a derivative
+distribution of the WestPlay project.
+
+Source code for this build
+--------------------------
+Launcher (the TruckPlay.exe in this package):
+    src/  (C# .NET Framework 4.8, WinForms; embeds the host executable)
+    Build: powershell -ExecutionPolicy Bypass -File build.ps1
+    Release: powershell -ExecutionPolicy Bypass -File release.ps1
+
+Host (the embedded truckplay-host.exe, Rust):
+    Upstream: https://github.com/enes-less/WestPlay
+    Branch:   truckplay-product
+    Base:     WestPlay 2.4.x
+    Build:    cargo build --release -p westplay-host --features truckplay-proto --bin truckplay-host
+
+Host executable SHA-256:
+    3057BF2C2DEA007FD83091F03C11A909289EAFEC7391AB9213159AED1C50C262
+
+WestPlay itself is not bundled: TruckPlay uses the copy already on the
+PC, or downloads WestPlay's official installer from its GitHub releases
+when the user clicks "Install".
+
+Third-party components and their licences are listed in
+THIRD-PARTY-NOTICES.md. The full licence text and WestPlay licensing
+notes are in LICENSE and LICENSING.md.
+
+This program is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+General Public License for more details.
+
+WestPlay is a separate project by its own authors; TruckPlay does not
+modify WestPlay or Euro Truck Simulator 2 and is not endorsed by them.

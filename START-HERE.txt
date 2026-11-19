@@ -1,0 +1,112 @@
+====================================================================
+  TRUCKPLAY - START HERE
+====================================================================
+
+TruckPlay puts the WestPlay truck dashboard on your tablet, over
+your own Wi-Fi.
+
+You do not need to install anything else first. TruckPlay installs
+WestPlay for you if it is missing.
+
+--------------------------------------------------------------------
+  WHAT YOU NEED
+--------------------------------------------------------------------
+  * A Windows 10 or Windows 11 PC (64-bit).
+  * Euro Truck Simulator 2 on that PC.
+  * A tablet and this PC on the same Wi-Fi.
+  * Google Chrome on the tablet (any modern browser works).
+
+--------------------------------------------------------------------
+  STEP 1 - START TRUCKPLAY
+--------------------------------------------------------------------
+  1. Double-click TruckPlay.exe.
+
+     If Windows shows "Windows protected your PC", click
+     "More info", then "Run anyway". This is normal for a small
+     free app; it does not mean it is dangerous.
+
+  2. The TruckPlay setup window opens.
+
+     * If it says WestPlay is "Not installed", click "Install".
+       TruckPlay downloads WestPlay from its official GitHub page
+       (about 12 MB) and installs it. Wait for "Installed".
+
+       First time only: open WestPlay once from the Start Menu and
+       let its short setup find Euro Truck Simulator 2, then close
+       WestPlay again. TruckPlay needs those files.
+
+     * If it says "Installed", you are ready. Nothing to do.
+
+  3. If it asks about Windows Firewall, click "Allow".
+
+  4. Click "Start TruckPlay".
+
+--------------------------------------------------------------------
+  STEP 2 - CONNECT THE TABLET (one time)
+--------------------------------------------------------------------
+  1. On the tablet, open Google Chrome.
+  2. Type the address shown in the TruckPlay window, for example
+       http://192.168.1.36:18733
+  3. Type the six-digit code shown in TruckPlay, for example
+       280925
+  4. Tap "Connect".
+
+The tablet remembers this. Next time, just open TruckPlay and drive.
+
+Tip: if the video is choppy, use the 5 GHz Wi-Fi and pick "Smooth"
+in TruckPlay Settings.
+
+--------------------------------------------------------------------
+  GOOD TO KNOW
+--------------------------------------------------------------------
+  * Closing the TruckPlay window does NOT stop it. It keeps running
+    in the notification area (bottom-right). Click its icon to open
+    it again. To stop it completely, click "Quit".
+
+  * Close the WestPlay app while TruckPlay runs. Both use the same
+    dashboard. TruckPlay offers a button that closes it for you.
+
+  * In the game, start Euro Truck Simulator 2 and get into a truck.
+    The dashboard appears on the truck's screen.
+
+  * Some trucks do not have a compatible dashboard screen. That is
+    a limitation of the game, not of TruckPlay.
+
+--------------------------------------------------------------------
+  IF SOMETHING DOES NOT WORK
+--------------------------------------------------------------------
+  * Tablet cannot open the page
+    - Check both devices are on the same Wi-Fi (not guest Wi-Fi).
+    - Click "Allow access" in TruckPlay if it is shown.
+
+  * "Wrong code"
+    - Use the six digits shown in the TruckPlay window.
+
+  * WestPlay says it is still running
+    - Close WestPlay, or click "Close WestPlay" in TruckPlay.
+
+  * Something else
+    - Open TruckPlay and click "Help". It explains every message.
+
+--------------------------------------------------------------------
+  REMOVE TRUCKPLAY
+--------------------------------------------------------------------
+  Open TruckPlay > Settings > Remove TruckPlay. Your settings are
+  kept and WestPlay and the game are not touched. You can then
+  delete TruckPlay.exe.
+
+--------------------------------------------------------------------
+  ABOUT
+--------------------------------------------------------------------
+  TruckPlay is free software under the GPL-3.0-or-later licence and
+  is based on WestPlay. It does not modify WestPlay or the game.
+
+  TruckPlay only uses the internet when you click "Install" to get
+  WestPlay, and it downloads only from WestPlay's official releases
+  on GitHub.
+
+  Licence details: LICENSE and LICENSING.md
+  Source details:  SOURCE.txt
+
+  More help is inside TruckPlay under "Help".
+====================================================================

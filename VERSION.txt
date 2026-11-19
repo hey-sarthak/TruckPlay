@@ -1,0 +1,7 @@
+TruckPlay V1
+Launcher build 2.0.0
+Packaged 
+2026-11-19
+
+Start with START-HERE.txt.
+WestPlay is installed by TruckPlay when you click Install.
