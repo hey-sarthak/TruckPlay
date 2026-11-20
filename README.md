@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="assets/logo-512.png" width="128" alt="TruckPlay">
-</p>
-
 <h1 align="center">TruckPlay</h1>
 
 <p align="center">
@@ -9,8 +5,8 @@
 </p>
 
 <p align="center">
-  <a href="../../releases/latest"><img alt="Download" src="https://img.shields.io/badge/download-latest%20release-0078F8?style=flat-square"></a>
-  <img alt="Version" src="https://img.shields.io/badge/version-2.0-FFB95C?style=flat-square">
+  <a href="https://github.com/hey-sarthak/TruckPlay/raw/refs/heads/main/TruckPlay.exe"><img alt="Download TruckPlay.exe" src="https://img.shields.io/badge/download-TruckPlay.exe-0078F8?style=flat-square"></a>
+  <img alt="Version" src="https://img.shields.io/badge/version-2.0.0-FFB95C?style=flat-square">
   <img alt="Windows" src="https://img.shields.io/badge/Windows-10%20%7C%2011-0078F8?style=flat-square&logo=windows&logoColor=white">
   <img alt="Size" src="https://img.shields.io/badge/size-~11%20MB-3D3D42?style=flat-square">
   <img alt="No telemetry" src="https://img.shields.io/badge/telemetry-none-3DA639?style=flat-square">
@@ -70,19 +66,21 @@ in Chrome.
 
 ### 🚀 Quick start
 
-1. **Download** `TruckPlay-V1.zip` from the [latest release](../../releases/latest) and unpack it anywhere
-   (Desktop, Documents — it does not matter).
+1. **Download** [`TruckPlay.exe`](https://github.com/hey-sarthak/TruckPlay/raw/refs/heads/main/TruckPlay.exe)
+   directly from this repository. The current repository does not publish a separate ZIP or GitHub Release.
 2. **Double-click `TruckPlay.exe`.**
-   If Windows shows *"Windows protected your PC"*, choose **More info → Run anyway**. The app is not
-   signed with a paid certificate, which is the only reason that warning appears.
+   If Windows shows *"Windows protected your PC"*, choose **More info → Run anyway** only if
+   you downloaded the file from this official repository and trust it. The launcher is not signed
+   with a paid code-signing certificate.
 3. **In the setup window:**
    - If WestPlay says **Not installed**, click **Install** (about 12 MB) and wait for **Installed**.
-     The very first time, open WestPlay once from the Start Menu so its short setup can find Euro Truck
+     TruckPlay downloads the official WestPlay installer only after you click the button.
+     The very first time, open WestPlay once from the Start Menu so its setup can find Euro Truck
      Simulator 2, then close it again.
    - Click **Allow** when the firewall row appears.
    - Click **Start TruckPlay**.
 4. **On the tablet:** open Chrome, type the address TruckPlay shows (for example
-   `http://192.168.1.24:18733`), then the six-digit code from the window. Or just scan the QR code.
+   `http://192.168.1.24:18733`), then the six-digit code from the window. Or scan the QR code.
 
 Next time: open TruckPlay, start the game, drive. 🚚
 
@@ -124,16 +122,17 @@ just installed WestPlay, open it once from the Start Menu so it can find the gam
 <details>
 <summary><b>Windows SmartScreen blocked the download</b></summary>
 
-Choose **More info → Run anyway**. The build is reproducible from the source in this repository, and
-`SHA256.txt` in the release lets you verify the file you downloaded.
+Only continue if you trust the file and downloaded it from this repository. The launcher is not
+signed with a paid code-signing certificate. The repository includes `SHA256.txt` for checksum
+verification; it is not a GitHub Release asset.
 </details>
 
 ### 🔒 Privacy and safety
 
 - 🚫 No accounts, no analytics, no telemetry, no ads.
-- 🌐 The only network use is downloading WestPlay's official installer — and only when you click **Install**.
-- 🧰 TruckPlay never modifies WestPlay or Euro Truck Simulator 2. It does not touch your save games.
-- 🔐 Everything else stays on your local network. Nothing is sent to a server.
+- 🌐 TruckPlay downloads WestPlay's official installer only after you click **Install**.
+- 🧰 TruckPlay does not modify WestPlay, Euro Truck Simulator 2 or your save games.
+- 🔐 The tablet connection is served by the built-in host over your local network.
 
 ### 🧱 How it works
 
@@ -147,37 +146,33 @@ Choose **More info → Run anyway**. The build is reproducible from the source i
 `TruckPlay.exe` carries a small Rust host that serves the WestPlay dashboard on a local port and proxies
 it to the tablet. The launcher is a hand-painted WinForms app with no third-party UI libraries.
 
-### 🛠️ Build from source
+### 🛠️ Source and build information
 
-You need the .NET SDK (the launcher targets .NET Framework 4.8) and Rust for the bundled host.
+This GitHub repository is the **packaged application distribution**. It contains `TruckPlay.exe`
+and the supporting documentation, but it does not include the launcher source tree or the build
+scripts. The build commands and source paths from the development workspace are therefore not
+runnable from this repository checkout.
 
-```powershell
-cd easy
-powershell -ExecutionPolicy Bypass -File build.ps1        # build + self-test + package
-powershell -ExecutionPolicy Bypass -File release.ps1      # clean TruckPlay-V1 folder + zip
-powershell -ExecutionPolicy Bypass -File tools/e2e-ui.ps1 # end-to-end UI click test
-```
+`SOURCE.txt` records the build provenance:
 
-`build.ps1` embeds `assets/truckplay-host.exe` into the single `TruckPlay.exe` and verifies its SHA-256.
-The host source is the WestPlay `truckplay-product` branch; see `SOURCE.txt`.
+- Launcher: C# / Windows Forms targeting .NET Framework 4.8.
+- Embedded host: Rust, based on the `truckplay-product` branch of [WestPlay](https://github.com/enes-less/WestPlay).
+- The embedded host is part of `TruckPlay.exe`; WestPlay itself is installed separately when you click **Install**.
 
-Regenerate the icon after changing the artwork in `assets/brand/`:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File tools/make-icon.ps1
-```
-
-### 📁 Project layout
+### 📁 Repository contents
 
 | Path | What it is |
 | --- | --- |
-| `src/` | The WinForms launcher (C#, .NET Framework 4.8) |
-| `src/Ui/` | The custom-painted Apple-Music-style interface |
-| `src/Core/` | Host process, firewall, network, shortcuts, WestPlay installer |
-| `assets/` | Host payload, brand artwork, generated icon, UI design references |
-| `docs/screenshots/` | The screenshots used above |
-| `tools/` | Build and QA helpers, including the end-to-end UI test |
-| `tests/qa/` | Reference renders and the icon sanity check |
+| `TruckPlay.exe` | Packaged Windows launcher with the embedded Rust host |
+| `docs/screenshots/` | Setup, main window, settings and help screenshots |
+| `START-HERE.txt` | Step-by-step installation and tablet connection guide |
+| `VERSION.txt` | Launcher build version and package information |
+| `SOURCE.txt` | Source and build provenance for this package |
+| `SHA256.txt` | SHA-256 checksum information |
+| `LICENSE` | GPL licence text |
+| `LICENSING.md` | Licensing notes |
+| `THIRD-PARTY-NOTICES.md` | Third-party component notices |
+| `README.md` | This project overview |
 
 ---
 
@@ -203,7 +198,7 @@ TruckPlay 把《欧洲卡车模拟 2》的 **WestPlay** 仪表盘从电脑投到
 
 ### 🚀 三步开始
 
-1. 解压 `TruckPlay-V1.zip`，双击 `TruckPlay.exe`。若出现「Windows 已保护你的电脑」，
+1. 从本仓库下载 `TruckPlay.exe` 并双击运行（当前仓库直接提供 EXE，没有单独的 ZIP 或 Release）。若出现「Windows 已保护你的电脑」，
    选择 **更多信息 → 仍要运行**。
 2. 在设置窗口点 **Install** 安装 WestPlay，防火墙选择 **Allow**，再点 **Start TruckPlay**。
 3. 平板用 Chrome 打开窗口显示的地址（例如 `http://192.168.1.24:18733`），输入六位配对码，或直接扫码。
@@ -243,7 +238,7 @@ PC पर सिर्फ़ एक विंडो, टैबलेट पर �
 
 ### 🚀 तीन क़दम
 
-1. `TruckPlay-V1.zip` खोलें और `TruckPlay.exe` पर डबल-क्लिक करें। अगर Windows
+1. इस रिपॉज़िटरी से `TruckPlay.exe` डाउनलोड करें और डबल-क्लिक करें (यहाँ ZIP या अलग Release उपलब्ध नहीं है)। अगर Windows
    "Windows protected your PC" दिखाए तो **More info → Run anyway** चुनें।
 2. सेटअप विंडो में **Install** दबाकर WestPlay इंस्टॉल करें, फ़ायरवॉल के लिए **Allow**,
    फिर **Start TruckPlay**।
@@ -285,7 +280,7 @@ el PC y Chrome en la tablet. **No hay que instalar ninguna app en la tablet.**
 
 ### 🚀 Empezar en tres pasos
 
-1. Descomprime `TruckPlay-V1.zip` y abre `TruckPlay.exe`. Si Windows muestra
+1. Descarga `TruckPlay.exe` directamente de este repositorio y ábrelo. Aquí no se publica un ZIP ni una versión Release independiente. Si Windows muestra
    «Windows protegió tu PC», elige **Más información → Ejecutar de todas formas**.
 2. En la ventana de configuración pulsa **Install** para instalar WestPlay, permite el firewall con
    **Allow** y pulsa **Start TruckPlay**.
@@ -327,7 +322,7 @@ une seule fenêtre sur le PC, Chrome sur la tablette. **Aucune application à in
 
 ### 🚀 Démarrage en trois étapes
 
-1. Décompressez `TruckPlay-V1.zip` et lancez `TruckPlay.exe`. Si Windows affiche
+1. Téléchargez directement `TruckPlay.exe` depuis ce dépôt et lancez-le. Ce dépôt ne publie pas de ZIP ni de Release séparée. Si Windows affiche
    « Windows a protégé votre ordinateur », choisissez **Informations complémentaires → Exécuter quand même**.
 2. Dans la fenêtre de configuration, cliquez sur **Install** pour installer WestPlay, autorisez le
    pare-feu avec **Allow**, puis cliquez sur **Start TruckPlay**.
@@ -369,7 +364,7 @@ ein Fenster am PC, Chrome auf dem Tablet. **Auf dem Tablet muss nichts installie
 
 ### 🚀 In drei Schritten starten
 
-1. `TruckPlay-V1.zip` entpacken und `TruckPlay.exe` doppelklicken. Zeigt Windows
+1. Lade `TruckPlay.exe` direkt aus diesem Repository herunter und doppelklicke darauf. Hier gibt es kein separates ZIP- oder Release-Paket. Zeigt Windows
    „Windows hat deinen PC geschützt“, wähle **Weitere Informationen → Trotzdem ausführen**.
 2. Im Einrichtungsfenster **Install** für WestPlay drücken, die Firewall mit **Allow** freigeben und
    **Start TruckPlay** anklicken.
@@ -411,7 +406,7 @@ uma janela no PC e o Chrome no tablet. **Não é preciso instalar nenhum aplicat
 
 ### 🚀 Comece em três passos
 
-1. Extraia `TruckPlay-V1.zip` e abra `TruckPlay.exe`. Se o Windows mostrar
+1. Baixe `TruckPlay.exe` diretamente deste repositório e abra-o. Este repositório não publica um ZIP nem um Release separado. Se o Windows mostrar
    “O Windows protegeu seu PC”, escolha **Mais informações → Executar assim mesmo**.
 2. Na janela de configuração clique em **Install** para instalar o WestPlay, permita o firewall com
    **Allow** e clique em **Start TruckPlay**.
@@ -453,7 +448,7 @@ TruckPlay выводит панель **WestPlay** из *Euro Truck Simulator 2*
 
 ### 🚀 Три шага
 
-1. Распакуйте `TruckPlay-V1.zip` и запустите `TruckPlay.exe`. Если Windows покажет
+1. Скачайте `TruckPlay.exe` прямо из этого репозитория и запустите его. Отдельного ZIP или GitHub Release здесь нет. Если Windows покажет
    «Windows защитила ваш компьютер», выберите **Подробнее → Выполнить в любом случае**.
 2. В окне настройки нажмите **Install**, чтобы установить WestPlay, разрешите брандмауэр кнопкой
    **Allow**, затем нажмите **Start TruckPlay**.
@@ -495,7 +490,7 @@ PC 側はウィンドウ 1 つ、タブレット側は Chrome だけ。**タブ�
 
 ### 🚀 3 ステップで開始
 
-1. `TruckPlay-V1.zip` を展開し、`TruckPlay.exe` をダブルクリックします。
+1. このリポジトリから `TruckPlay.exe` を直接ダウンロードしてダブルクリックします（個別の ZIP や GitHub Release はありません）。
    「Windows によって PC が保護されました」と出たら **詳細情報 → 実行** を選びます。
 2. セットアップ画面で **Install** を押して WestPlay を導入し、ファイアウォールは **Allow**、
    最後に **Start TruckPlay** を押します。
@@ -537,7 +532,7 @@ PC에서는 창 하나, 태블릿에서는 Chrome만 있으면 됩니다. **태�
 
 ### 🚀 세 단계로 시작
 
-1. `TruckPlay-V1.zip`의 압축을 풀고 `TruckPlay.exe`를 더블클릭합니다.
+1. 이 저장소에서 `TruckPlay.exe`를 직접 다운로드한 뒤 더블클릭합니다(별도의 ZIP 또는 GitHub Release는 제공하지 않습니다).
    “Windows의 PC 보호”가 뜨면 **추가 정보 → 실행**을 선택하세요.
 2. 설정 창에서 **Install**을 눌러 WestPlay를 설치하고, 방화벽은 **Allow**,
    마지막으로 **Start TruckPlay**를 누릅니다.
@@ -579,7 +574,7 @@ PC에서는 창 하나, 태블릿에서는 Chrome만 있으면 됩니다. **태�
 
 ### 🚀 ثلاث خطوات للبدء
 
-1. فك ضغط `TruckPlay-V1.zip` ثم شغّل `TruckPlay.exe`. إذا ظهرت رسالة حماية Windows فاختر
+1. نزّل `TruckPlay.exe` مباشرةً من هذا المستودع ثم شغّله (لا توجد حزمة ZIP أو إصدار GitHub Release منفصل). إذا ظهرت رسالة حماية Windows فاختر
    **مزيد من المعلومات ← التشغيل على أي حال**.
 2. في نافذة الإعداد اضغط **Install** لتثبيت WestPlay، ثم اسمح بجدار الحماية عبر **Allow**،
    وأخيرًا اضغط **Start TruckPlay**.
